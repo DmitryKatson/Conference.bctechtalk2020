@@ -1,0 +1,26 @@
+{
+  "id": "334aa23c-99a4-4ed8-95cc-49aed1f5c573",
+  "name": "bctechtalk2020",
+  "publisher": "Dmitry Katson",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "17.0.0.0",
+  "application": "17.0.0.0",
+  "idRanges": [
+    {
+      "from": 50100,
+      "to": 50149
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://bctechtalk2020.com/help/",
+  "showMyCode": true,
+  "runtime": "6.0"
+}

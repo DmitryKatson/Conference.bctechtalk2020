@@ -3,6 +3,7 @@ page 80100 "FishSpeciesAroundMe"
     PageType = List;
     Editable = false;
     Caption = 'Fish around me';
+    SourceTable = FishSpecie;
     layout
     {
         area(Content)
@@ -33,6 +34,25 @@ page 80100 "FishSpeciesAroundMe"
                     BlankZero = true;
                 }
             }
+            repeater(Species)
+            {
+                field(Code; Code)
+                {
+                    ApplicationArea = all;
+                }
+                field(Name; Name)
+                {
+                    ApplicationArea = all;
+                }
+                field(Description; Description)
+                {
+                    ApplicationArea = all;
+                }
+                field(PictureUrl; PictureUrl)
+                {
+                    ApplicationArea = all;
+                }
+            }
         }
     }
     actions
@@ -50,13 +70,13 @@ page 80100 "FishSpeciesAroundMe"
 
                 trigger OnAction()
                 var
-                    MainCodeunit: Codeunit GetFishSpeciesInMyGeoPosition;
+                    GetFishSpeciesInMyGeoLocation: Codeunit GetFishSpeciesInMyGeoLocation;
                 begin
-                    MainCodeunit.GetFishSpeciesInMyGeoPosition(MyGeoLocationBuffer);
+                    GetFishSpeciesInMyGeoLocation.GetFishSpeciesInMyGeoLocation(MyGeoLocationBuffer);
                 end;
             }
         }
     }
     var
-        MyGeoLocationBuffer: Record MyGeoLocationBuffer;
+        MyGeoLocationBuffer: Record "MyGeoLocationBuffer";
 }

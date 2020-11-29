@@ -3,30 +3,62 @@ codeunit 80100 "GetFishSpecies"
     procedure GetFishSpecies(CountryISOCode: Integer)
     var
         Client: HttpClient;
-        Response: HttpResponseMessage;
-        ResponseJson: Text;
-        JsonToken: JsonToken;
-        JsonArray: JsonArray;
-        JsonObject: JsonObject;
+        // content: HttpContent;
+        contentHeaders: HttpHeaders;
+        request: HttpRequestMessage;
+        response: HttpResponseMessage;
+        ResponseJsonAsText: Text;
+        ResponseToken: JsonToken;
+        DataToken: JsonToken;
+        FishSpecieToken: JsonToken;
         i: Integer;
+
+        responseInStream: InStream;
+        responseOutStream: OutStream;
+        TempBlob: Codeunit "Temp Blob";
+        convertedInStream: InStream;
+        DataCompression: Codeunit "Data Compression";
+        decompressedOutStream: OutStream;
+        FishSpecie: Record FishSpecie;
+
     begin
-        Client.Get(GetRequestUrl(CountryISOCode), Response);
-        Response.Content.ReadAs(ResponseJson);
-        JsonObject.ReadFrom(ResponseJson);
-        JsonObject.Get('data', JsonToken);
-        JsonToken.WriteTo(ResponseJson);
-        JsonArray.ReadFrom(ResponseJson);
-        for i := 0 to JsonArray.Count - 1 do begin
-            JsonArray.Get(i, JsonToken);
-            InsertFishSpecie(JsonToken);
+        // content.GetHeaders(contentHeaders);
+        // contentHeaders.Clear();
+        // contentHeaders.Remove('Content-Type');
+        // contentHeaders.Remove('Content-Encoding');
+        // contentHeaders.Add('Content-Encoding', 'gzip');
+        // contentHeaders.Add('Content-Type', 'application/json; charset=utf8');
+
+        request.GetHeaders(contentHeaders);
+        contentHeaders.Remove('Accept');
+        contentHeaders.Remove('accept-encoding');
+        contentHeaders.Add('Accept', 'application/vnd.ropensci.v6+json');
+        contentHeaders.Add('accept-encoding', 'gzip, deflate');
+
+        request.SetRequestUri(GetRequestUrl(CountryISOCode));
+        request.Method('GET');
+
+        Client.Send(request, response);
+
+        response.Content.ReadAs(responseInStream);
+        TempBlob.CreateOutStream(decompressedOutStream);
+        DataCompression.GZipDecompress(responseInStream, decompressedOutStream);
+        TempBlob.CreateInStream(convertedInStream);
+        convertedInStream.ReadText(ResponseJsonAsText);
+
+        FishSpecie.DeleteAll();
+
+        ResponseToken.ReadFrom(ResponseJsonAsText);
+        ResponseToken.SelectToken('$.data', DataToken);
+        for i := 0 to DataToken.AsArray().Count - 1 do begin
+            DataToken.AsArray().Get(i, FishSpecieToken);
+            InsertFishSpecie(FishSpecieToken);
         end;
     end;
 
-    local procedure GetRequestUrl(CountryISOCode: Integer) url: Text
+    local procedure GetRequestUrl(CountryISOCode: Integer): Text
     begin
-        url := StrSubstNo('%1%2%3%4', GetFishBaseMainUrl(), GetFishBaseCountryUrlPart(), AddDefaultParametersToTheUrl(), AddCountryFilterToTheUrl(CountryISOCode));
-
-        // exit(StrSubstNo('%1%2%3%4', GetFishBaseMainUrl(), GetFishBaseCountryUrlPart(), AddDefaultParametersToTheUrl(), AddCountryFilterToTheUrl(CountryISOCode)));
+        exit(StrSubstNo('%1%2%3%4', GetFishBaseMainUrl(), GetFishBaseCountryUrlPart(), AddDefaultParametersToTheUrl(), AddCountryFilterToTheUrl(CountryISOCode)));
     end;
 
 

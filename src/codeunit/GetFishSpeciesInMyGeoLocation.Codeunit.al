@@ -8,10 +8,11 @@ codeunit 80103 "GetFishSpeciesInMyGeoLocation"
         GetFishSpecies: Codeunit GetFishSpecies;
     begin
         with Rec do begin
-            GetGeoLocation.GetGeoLocation(Latitude, Longitude);
-            GetCountry.GetCountry(Country, Latitude, Longitude);
-            GetCountryISO.GetCountryISO(CountryISOCode, Country);
-            GetFishSpecies.GetFishSpecies(CountryISOCode);
+            // GetGeoLocation.GetGeoLocation(Latitude, Longitude);
+            // GetCountry.GetCountry(Country, Latitude, Longitude);
+            // GetCountryISO.GetCountryISO(CountryISOCode, Country);
+            // GetFishSpecies.GetFishSpecies(CountryISOCode);
+            GetFishSpecies.GetFishSpecies(702);
         end;
     end;
 

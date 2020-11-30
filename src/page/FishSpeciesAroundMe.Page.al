@@ -1,3 +1,4 @@
+// #pragma warning disable AL0604
 page 80100 "FishSpeciesAroundMe"
 {
     PageType = List;
@@ -80,4 +81,5 @@ page 80100 "FishSpeciesAroundMe"
     }
     var
         MyGeoLocationBuffer: Record "MyGeoLocationBuffer";
+    // #pragma warning restore AL0604
 }

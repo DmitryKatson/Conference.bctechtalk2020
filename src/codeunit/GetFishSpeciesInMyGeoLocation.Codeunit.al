@@ -41,5 +41,4 @@ codeunit 80103 "GetFishSpeciesInMyGeoLocation"
             GetFishSpecies.GetFishSpecies(CountryISOCode);
         end;
     end;
-
 }

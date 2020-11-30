@@ -4,6 +4,7 @@ page 80100 "FishSpeciesAroundMe"
     Editable = false;
     Caption = 'Fish around me';
     SourceTable = FishSpecie;
+    CardPageId = "FishSpecie Card";
     layout
     {
         area(Content)

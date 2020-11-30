@@ -22,18 +22,18 @@ page 80101 "FishSpecie Card"
                     ApplicationArea = All;
                     MultiLine = true;
                 }
-                field(BodyShapeI; BodyShapeI)
+                field(BodyShapeI; Rec.BodyShapeI)
                 {
                     ApplicationArea = All;
                 }
-                field(Dangerous; Dangerous)
+                field(Dangerous; Rec.Dangerous)
                 {
                     ApplicationArea = All;
                 }
             }
             group(Price)
             {
-                field(PriceCateg; PriceCateg)
+                field(PriceCateg; Rec.PriceCateg)
                 {
                     ApplicationArea = All;
                 }

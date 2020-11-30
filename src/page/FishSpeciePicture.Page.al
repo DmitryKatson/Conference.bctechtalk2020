@@ -11,7 +11,7 @@ page 80102 "FishSpecie Picture"
     {
         area(content)
         {
-            field(Picture; Picture)
+            field(Picture; Rec.Picture)
             {
                 ApplicationArea = Basic, Suite, Invoicing;
                 ShowCaption = false;

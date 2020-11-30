@@ -38,19 +38,19 @@ page 80100 "FishSpeciesAroundMe"
             }
             repeater(Species)
             {
-                field(Code; Code)
+                field(Code; Rec.Code)
                 {
                     ApplicationArea = all;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = all;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = all;
                 }
-                field(PictureUrl; PictureUrl)
+                field(PictureUrl; Rec.PictureUrl)
                 {
                     ApplicationArea = all;
                 }

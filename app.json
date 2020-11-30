@@ -22,5 +22,6 @@
   ],
   "contextSensitiveHelpUrl": "https://bctechtalk2020.com/help/",
   "showMyCode": true,
-  "runtime": "6.0"
+  "runtime": "6.0",
+  "applicationInsightsKey": "6ad2841a-87a3-4c71-a410-74f4fd7bb7a1"
 }

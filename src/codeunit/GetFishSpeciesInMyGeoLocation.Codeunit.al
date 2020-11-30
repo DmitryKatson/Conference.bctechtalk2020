@@ -33,12 +33,22 @@ codeunit 80103 "GetFishSpeciesInMyGeoLocation"
         GetCountry: Codeunit GetCountry;
         GetCountryISO: Codeunit GetCountryISO;
         GetFishSpecies: Codeunit GetFishSpecies;
+        CustDimension: Dictionary of [Text, Text];
+        startTime: DateTime;
+        endTime: DateTime;
+        duration: Integer;
     begin
-        with Rec do begin
-            GetGeoLocation.GetGeoLocation(Latitude, Longitude);
-            GetCountry.GetCountry(Country, Latitude, Longitude);
-            GetCountryISO.GetCountryISO(CountryISOCode, Country);
-            GetFishSpecies.GetFishSpecies(CountryISOCode);
-        end;
+        startTime := CurrentDateTime;
+
+        GetGeoLocation.GetGeoLocation(Rec.Latitude, Rec.Longitude);
+        GetCountry.GetCountry(Rec.Country, Rec.Latitude, Rec.Longitude);
+        GetCountryISO.GetCountryISO(Rec.CountryISOCode, Rec.Country);
+        GetFishSpecies.GetFishSpecies(Rec.CountryISOCode);
+
+        endTime := CurrentDateTime;
+        duration := endTime - startTime;
+
+        CustDimension.Add('duration', Format(duration));
+        Session.LogMessage('my001', 'Very long', Verbosity::Normal, DataClassification::SystemMetadata, TelemetryScope::ExtensionPublisher, CustDimension);
     end;
 }

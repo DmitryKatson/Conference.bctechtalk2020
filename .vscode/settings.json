@@ -5,4 +5,5 @@
     "CRS.OnSaveAlFileAction": "Reorganize",
     "CRS.RenameWithGit": true,
     "bdev-al-xml-doc.checkProcedureDocumentation": false
+    
 }
